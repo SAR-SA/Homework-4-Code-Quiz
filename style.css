@@ -3,7 +3,16 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
-body {
+nav {
+    font-weight: bold;
+    float: right;
+}
+
+a {
+    float: left;
+}
+
+.container {
     padding: 0;
     margin: 0;
     display: flex;
@@ -12,6 +21,8 @@ body {
     margin-left: 200px;
     align-items: center;
 }
+
+
 
 .btn-grid {
     display: grid;
@@ -42,8 +53,17 @@ body {
     margin-bottom: 20px;
 }
 
-#end {
+#endQuiz {
     font-weight: bold;
     font-size: xx-large;
     margin-bottom: 20px;
+}
+
+#submit-btn {
+    margin-top: 125px;
+}
+
+#start-btn {
+    float: left;
+    margin-top: 10px;
 }

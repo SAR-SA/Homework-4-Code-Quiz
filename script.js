@@ -1,12 +1,16 @@
 const startButton = document.getElementById('start-btn')
 const nextButton = document.getElementById('next-btn')
+const submitButton = document.getElementById('submit-btn')
 const questionContainerElement = document.getElementById('question-container')
 const questionElement = document.getElementById('question')
 const answerButtonsElement = document.getElementById('answer-buttons')
 const introContainerElement = document.getElementById('intro-container')
 const introElement = document.getElementById('intro')
-const endQuizContainerElement = document.getElementById('endQuiz-Container')
+const endQuizContainerElement = document.getElementById('endQuiz-container')
 const endQuizElement = document.getElementById('endQuiz')
+const yourScoreElement = document.getElementById('yourScore')
+const viewHighScoresContainerElement = document.getElementById('viewHighScores-container')
+const timerElement = document.getElementById('timer')
 
 
 /*
@@ -32,26 +36,74 @@ Step 5: let the user play again if they want to.
 
 let shuffledQuestions, currentQuestionIndex
 let score = 0
+let secondsLeft = 300
 
 startButton.addEventListener('click', startGame)
+submitButton.addEventListener('click', highScores)
 
 //Start the game
 function startGame() {
-    introElement.classList.add('hide')
+    introContainerElement.classList.add('hide')
     startButton.classList.add('hide')
-    endQuizElement.classList.add('hide')
+    endQuizContainerElement.classList.add('hide')
     shuffledQuestions = questions.sort(() => Math.random() - .5)
     currentQuestionIndex = 0
     questionContainerElement.classList.remove('hide')
     setNextQuestion()
+    startTimer()
 }
+
+//Timer
+function startTimer() {
+    timerInterval = setInterval(function() {
+        secondsLeft--;
+        timerElement.textContent = secondsLeft
+    }, 1000);
+}
+
+    
 
 //Set next question
 function setNextQuestion() {
     resetState()
-    showQuestion(questions[currentQuestionIndex])
+    if (currentQuestionIndex < questions.length) {
+        showQuestion(questions[currentQuestionIndex]);
+
+    } if (currentQuestionIndex === questions.length) {
+        endQuizContainerElement.classList.remove('hide');
+        questionElement.classList.add('hide');
+        showScore()
+    }
 }
 
+function showScore() {
+    var tag = document.createElement("P");
+    var text = document.createTextNode("You scored " + score + " points!");
+    tag.appendChild(text);
+    var element = document.getElementById("endQuiz-container");
+    element.appendChild(tag);
+
+    var tag = document.createElement("P");
+    var text = document.createTextNode("Enter your Initial's Below:");
+    tag.appendChild(text);
+    var element = document.getElementById("endQuiz-container");
+    element.appendChild(tag);
+
+    var formElement = document.createElement('form');
+    formElement.setAttribute('method', 'post')
+    var initialsField = document.createElement('input')
+    initialsField.setAttribute('type', 'text')
+    var element = document.getElementById("endQuiz-container");
+    element.appendChild(initialsField);
+
+    submitButton.classList.remove('hide');
+}
+
+function highScores() {
+    submitButton.classList.add('hide');
+    endQuizContainerElement.classList.add('hide');
+    viewHighScoresContainerElement.classList.remove('hide');
+};
 
 
 function resetState() {
@@ -83,10 +135,10 @@ function selectAnswer(e) {
     const selectedButton = e.target;
     console.log(e.target.dataset.correct)
     if (e.target.dataset.correct === "true") {
-        score = score + 1;
+        score = score + 10;
 
     } else {
-        // timer reduce by ten seconds
+        secondsLeft = secondsLeft - 20;
     }
     console.log("score is " + score)
     // show next Question

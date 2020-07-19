@@ -10,10 +10,21 @@
 </head>
 
 <body>
+
+    <nav>
+        <div>Timer</div>
+        <div id='timer'></div>
+
+    </nav>
+    
+    <a href='highscorepage.html'>View Highscores</a>
+
     <div class='container'>
 
         <div id='intro-container'>
-            <div id='intro'>Intro</div>
+            <div id='intro'>Javascript Code Quiz</div>
+            <div>In this quiz you will given 10 questions and you will have 5 mins to complete the quiz. For each correct answer you will score 10 points! For each worng answer you will be deducted 20 secs. If the time runs out the quiz is over.</div>
+            <div><b>Good Luck!<b></b></div>
         </div>
 
         <div id='question-container' class='hide'>
@@ -36,13 +47,27 @@
         </div>
 
         <div id='endQuiz-container' class='hide'>
-            <div id='endQuiz'>Your score is</div>
+            <div id='endQuiz'>All Done!</div>
         </div>
 
+        <div id='viewHighScores-container' class='hide'>
+            <div>
+                <h1>HighScores</h1>
+            </div>
+
+        </div>
+
+        
         <div class='controls'>
             <button id='start-btn' class='start-btn btn'>Start</button>
-            <button id='next-btn' class='next-btn btn hide'>Next</button>
+            <button id='next-btn' class='start-btn btn hide'>Next</button>
+            <button id='submit-btn' class='submit-btn btn hide'>Submit Score</button>
         </div>
+
 </body>
+
+<footer>
+
+</footer>
 
 </html>
