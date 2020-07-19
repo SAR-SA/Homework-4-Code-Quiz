@@ -1,0 +1,49 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100vw,;
+    height: 50vh;
+    margin-left: 200px;
+    align-items: center;
+}
+
+.btn-grid {
+    display: grid;
+    margin: 10px;
+    gap: 5px;
+}
+
+.btn {
+    background-color: rgb(83, 7, 83);
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    outline: none;
+}
+
+.hide {
+    display: none;
+}
+
+#question {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#intro {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 20px;
+}
+
+#end {
+    font-weight: bold;
+    font-size: xx-large;
+    margin-bottom: 20px;
+}
