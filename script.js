@@ -1,8 +1,8 @@
 const startButton = document.getElementById('start-btn');
 const nextButton = document.getElementById('next-btn');
 const submitButton = document.getElementById('submit-btn');
-const goBackButton = document.getElementById('goBack-btn')
-const restartButton = document.getElementById('restart-btn')
+const goBackButton = document.getElementById('goBack-btn');
+const restartButton = document.getElementById('restart-btn');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer-buttons');
@@ -13,62 +13,62 @@ const endQuizElement = document.getElementById('endQuiz');
 const yourScoreElement = document.getElementById('yourScore');
 const viewHighScoresContainerElement = document.getElementById('viewHighScores-container');
 const timerElement = document.getElementById('timer');
-const topHighScoreButton = document.getElementById('topHighScore-btn')
+const topHighScoreButton = document.getElementById('topHighScore-btn');
 
 
-let shuffledQuestions, currentQuestionIndex
-let score = 0
-let secondsLeft = 300
+let shuffledQuestions, currentQuestionIndex;
+let score = 0;
+let secondsLeft = 300;
 
-startButton.addEventListener('click', startGame)
-submitButton.addEventListener('click', highScores)
-topHighScoreButton.addEventListener('click', highScores)
-goBackButton.addEventListener('click', homePage)
-restartButton.addEventListener('click', homePage)
+startButton.addEventListener('click', startGame);
+submitButton.addEventListener('click', highScores);
+topHighScoreButton.addEventListener('click', highScores);
+goBackButton.addEventListener('click', homePage);
+restartButton.addEventListener('click', homePage);
 
 //Go back to home page
 function homePage() {
     submitButton.classList.add('hide');
     endQuizContainerElement.classList.add('hide');
     viewHighScoresContainerElement.classList.add('hide');
-    introContainerElement.classList.remove('hide')
-    startButton.classList.remove('hide')
-    goBackButton.classList.add('hide')
-    restartButton.classList.add('hide')
+    introContainerElement.classList.remove('hide');
+    startButton.classList.remove('hide');
+    goBackButton.classList.add('hide');
+    restartButton.classList.add('hide');
 }
 
 //Start the game
 function startGame() {
-    introContainerElement.classList.add('hide')
-    startButton.classList.add('hide')
-    endQuizContainerElement.classList.add('hide')
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
-    currentQuestionIndex = 0
-    questionContainerElement.classList.remove('hide')
-    setNextQuestion()
-    startTimer()
+    introContainerElement.classList.add('hide');
+    startButton.classList.add('hide');
+    endQuizContainerElement.classList.add('hide');
+    shuffledQuestions = questions.sort(() => Math.random() - .5);
+    currentQuestionIndex = 0;
+    questionContainerElement.classList.remove('hide');
+    setNextQuestion();
+    startTimer();
 }
 
 //Timer
 function startTimer() {
-    timerInterval = setInterval(function() {
+    timerInterval = setInterval(function () {
         secondsLeft--;
-        timerElement.textContent = secondsLeft
+        timerElement.textContent = secondsLeft;
     }, 1000);
 }
 
-    
+
 
 //Set next question
 function setNextQuestion() {
-    resetState()
+    resetState();
     if (currentQuestionIndex < questions.length) {
         showQuestion(questions[currentQuestionIndex]);
 
     } if (currentQuestionIndex === questions.length) {
         endQuizContainerElement.classList.remove('hide');
         questionElement.classList.add('hide');
-        showScore()
+        showScore();
     }
 }
 
@@ -80,57 +80,57 @@ function showScore() {
     element.appendChild(tag);
 
     submitButton.classList.remove('hide');
-    restartButton.classList.remove('hide')
+    restartButton.classList.remove('hide');
 }
 
 function highScores() {
     submitButton.classList.add('hide');
     endQuizContainerElement.classList.add('hide');
     viewHighScoresContainerElement.classList.remove('hide');
-    introContainerElement.classList.add('hide')
-    startButton.classList.add('hide')
-    goBackButton.classList.remove('hide')
-};
+    introContainerElement.classList.add('hide');
+    startButton.classList.add('hide');
+    goBackButton.classList.remove('hide');
+}
 
 
 function resetState() {
-    nextButton.classList.add('hide')
+    nextButton.classList.add('hide');
     while (answerButtonsElement.firstChild) {
         answerButtonsElement.removeChild
-            (answerButtonsElement.firstChild)
+            (answerButtonsElement.firstChild);
     }
 
 }
 
 //Show next question
 function showQuestion(question) {
-    questionElement.innerText = question.question
+    questionElement.innerText = question.question;
     question.answers.forEach(answer => {
-        const button = document.createElement('button')
-        button.innerText = answer.text
-        button.classList.add('btn')
+        const button = document.createElement('button');
+        button.innerText = answer.text;
+        button.classList.add('btn');
         if (answer.correct) {
-            button.dataset.correct = answer.correct
+            button.dataset.correct = answer.correct;
         }
-        button.addEventListener('click', selectAnswer)
-        answerButtonsElement.appendChild(button)
-    })
+        button.addEventListener('click', selectAnswer);
+        answerButtonsElement.appendChild(button);
+    });
 }
 
 //Selecting answer
 function selectAnswer(e) {
     const selectedButton = e.target;
-    console.log(e.target.dataset.correct)
+    console.log(e.target.dataset.correct);
     if (e.target.dataset.correct === "true") {
         score = score + 10;
 
     } else {
         secondsLeft = secondsLeft - 20;
     }
-    console.log("score is " + score)
+    console.log("score is " + score);
     // show next Question
-    currentQuestionIndex = currentQuestionIndex + 1
-    setNextQuestion()
+    currentQuestionIndex = currentQuestionIndex + 1;
+    setNextQuestion();
 }
 
 
@@ -235,7 +235,7 @@ const questions = [
             { text: 'response.write("Hello World")', correct: false }
         ]
     },
-]
+];
 
 
 var todoInput = document.querySelector("#todo-text");
@@ -248,77 +248,77 @@ var todos = [];
 init();
 
 function renderTodos() {
-  // Clear HighScore element and update HighScoreCountSpan
-  todoList.innerHTML = "";
-  todoCountSpan.textContent = todos.length;
+    // Clear HighScore element and update HighScoreCountSpan
+    todoList.innerHTML = "";
+    todoCountSpan.textContent = todos.length;
 
-  // Render a new li for each HighScore
-  for (var i = 0; i < todos.length; i++) {
-    var todo = todos[i];
+    // Render a new li for each HighScore
+    for (var i = 0; i < todos.length; i++) {
+        var todo = todos[i];
 
-    var li = document.createElement("li");
-    li.textContent = todo ;
-    li.setAttribute("data-index", i);
+        var li = document.createElement("li");
+        li.textContent = todo;
+        li.setAttribute("data-index", i);
 
-    /*var button = document.createElement("button");
-    button.textContent = "Clear Score";
-
-    li.appendChild(button);*/
-    todoList.appendChild(li);
-  }
+        /*var button = document.createElement("button");
+        button.textContent = "Clear Score";
+    
+        li.appendChild(button);*/
+        todoList.appendChild(li);
+    }
 }
 
 function init() {
-  // Get stored HighScore from localStorage
-  // Parsing the JSON string to an object
-  var storedTodos = JSON.parse(localStorage.getItem("todos"));
+    // Get stored HighScore from localStorage
+    // Parsing the JSON string to an object
+    var storedTodos = JSON.parse(localStorage.getItem("todos"));
 
-  // If HighScore were retrieved from localStorage, update the HighScore array to it
-  if (storedTodos !== null) {
-    todos = storedTodos;
-  }
+    // If HighScore were retrieved from localStorage, update the HighScore array to it
+    if (storedTodos !== null) {
+        todos = storedTodos;
+    }
 
-  // Render HighScore to the DOM
-  renderTodos();
+    // Render HighScore to the DOM
+    renderTodos();
 }
 
 function storeTodos() {
-  // Stringify and set "HighScore" key in localStorage to todos array
-  localStorage.setItem("todos", JSON.stringify(todos));
+    // Stringify and set "HighScore" key in localStorage to todos array
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 // When form is submitted...
-todoForm.addEventListener("submit", function(event) {
-  event.preventDefault();
+todoForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-  var todoText = todoInput.value.trim() + score;
+    var todoText = todoInput.value.trim() + score;
 
-  // Return from function early if submitted HighScoreText is blank
-  if (todoText === "") {
-    return;
-  }
+    // Return from function early if submitted HighScoreText is blank
+    if (todoText === "") {
+        return;
+    }
 
-  // Add new HighScoreText to todos array, clear the input
-  todos.push(todoText);
-  todoInput.value = "";
-
-  // Store updated todos in localStorage, re-render the list
-  storeTodos();
-  renderTodos();
-});
-
-// When a element inside of the HighscoreList is clicked...
-todoList.addEventListener("click", function(event) {
-  var element = event.target;
-
-  // If that element is a button...
-  if (element.matches("button") === true) {
-    // Get its data-index value and remove the Highscore element from the list
-    var index = element.parentElement.getAttribute("data-index");
-    todos.splice(index, 1);
+    // Add new HighScoreText to todos array, clear the input
+    todos.push(todoText);
+    todoInput.value = "";
 
     // Store updated todos in localStorage, re-render the list
     storeTodos();
     renderTodos();
-  }
+});
+
+// When a element inside of the HighscoreList is clicked...
+todoList.addEventListener("click", function (event) {
+    var element = event.target;
+
+    // If that element is a button...
+    if (element.matches("button") === true) {
+        // Get its data-index value and remove the Highscore element from the list
+        var index = element.parentElement.getAttribute("data-index");
+        todos.splice(index, 1);
+
+        // Store updated todos in localStorage, re-render the list
+        storeTodos();
+        renderTodos();
+    }
 });
