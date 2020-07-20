@@ -11,13 +11,12 @@
 
 <body>
 
-    <nav>
+    <div id='timer-scope'>
         <div>Timer</div>
         <div id='timer'></div>
-
-    </nav>
+    </div>
     
-    <a href='highscorepage.html'>View Highscores</a>
+    <div id='top-score'><button id='topHighScore-btn' class='submit-btn'>View High Scores</button></div>
 
     <div class='container'>
 
@@ -48,11 +47,19 @@
 
         <div id='endQuiz-container' class='hide'>
             <div id='endQuiz'>All Done!</div>
+            <div class="todos">
+                <form id="todo-form" method="POST">
+                  <label for="todo-text">type your initials and hit enter:</label>
+                  <input type="text" placeholder="Initials" name="todo-text" id="todo-text" />
+                </form>
+            </div>
         </div>
-
+        
         <div id='viewHighScores-container' class='hide'>
             <div>
                 <h1>HighScores</h1>
+                <p>Highscore Count: <span id="todo-count">0</span></p>
+                <ul id="todo-list"></ul>
             </div>
 
         </div>
@@ -61,13 +68,12 @@
         <div class='controls'>
             <button id='start-btn' class='start-btn btn'>Start</button>
             <button id='next-btn' class='start-btn btn hide'>Next</button>
-            <button id='submit-btn' class='submit-btn btn hide'>Submit Score</button>
+            <button id='submit-btn' class='submit-btn btn hide'>View High Scores</button>
+            <button id='goBack-btn' class='submit-btn btn hide'>Go Back</button>
+            <button id='restart-btn' class='submit-btn btn hide'>Restart</button>
         </div>
 
 </body>
 
-<footer>
-
-</footer>
 
 </html>

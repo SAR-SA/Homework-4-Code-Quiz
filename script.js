@@ -1,38 +1,20 @@
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const submitButton = document.getElementById('submit-btn')
-const questionContainerElement = document.getElementById('question-container')
-const questionElement = document.getElementById('question')
-const answerButtonsElement = document.getElementById('answer-buttons')
-const introContainerElement = document.getElementById('intro-container')
-const introElement = document.getElementById('intro')
-const endQuizContainerElement = document.getElementById('endQuiz-container')
-const endQuizElement = document.getElementById('endQuiz')
-const yourScoreElement = document.getElementById('yourScore')
-const viewHighScoresContainerElement = document.getElementById('viewHighScores-container')
-const timerElement = document.getElementById('timer')
+const startButton = document.getElementById('start-btn');
+const nextButton = document.getElementById('next-btn');
+const submitButton = document.getElementById('submit-btn');
+const goBackButton = document.getElementById('goBack-btn')
+const restartButton = document.getElementById('restart-btn')
+const questionContainerElement = document.getElementById('question-container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer-buttons');
+const introContainerElement = document.getElementById('intro-container');
+const introElement = document.getElementById('intro');
+const endQuizContainerElement = document.getElementById('endQuiz-container');
+const endQuizElement = document.getElementById('endQuiz');
+const yourScoreElement = document.getElementById('yourScore');
+const viewHighScoresContainerElement = document.getElementById('viewHighScores-container');
+const timerElement = document.getElementById('timer');
+const topHighScoreButton = document.getElementById('topHighScore-btn')
 
-
-/*
-First step: User clicks start button to start game
-
-Step 2: the intial screen is replaced by the first question
-    There are 4 answers to choose from
-    If the user selects the right answer tthey are given a notice they are corrrect
-        socre goes up by 1
-    If the user selects the worng answer they are given a notice they are wrong
-        Timer is reduced ny 10 secs
-    show the next question
-
-Repeat step 2 till there are no more questions
-
-Step 3: Show user thier score and give option to write initials
-
-Step 4: add initials and score to Highscores page
-
-Step 5: let the user play again if they want to.
-
-*/
 
 let shuffledQuestions, currentQuestionIndex
 let score = 0
@@ -40,6 +22,20 @@ let secondsLeft = 300
 
 startButton.addEventListener('click', startGame)
 submitButton.addEventListener('click', highScores)
+topHighScoreButton.addEventListener('click', highScores)
+goBackButton.addEventListener('click', homePage)
+restartButton.addEventListener('click', homePage)
+
+//Go back to home page
+function homePage() {
+    submitButton.classList.add('hide');
+    endQuizContainerElement.classList.add('hide');
+    viewHighScoresContainerElement.classList.add('hide');
+    introContainerElement.classList.remove('hide')
+    startButton.classList.remove('hide')
+    goBackButton.classList.add('hide')
+    restartButton.classList.add('hide')
+}
 
 //Start the game
 function startGame() {
@@ -83,26 +79,17 @@ function showScore() {
     var element = document.getElementById("endQuiz-container");
     element.appendChild(tag);
 
-    var tag = document.createElement("P");
-    var text = document.createTextNode("Enter your Initial's Below:");
-    tag.appendChild(text);
-    var element = document.getElementById("endQuiz-container");
-    element.appendChild(tag);
-
-    var formElement = document.createElement('form');
-    formElement.setAttribute('method', 'post')
-    var initialsField = document.createElement('input')
-    initialsField.setAttribute('type', 'text')
-    var element = document.getElementById("endQuiz-container");
-    element.appendChild(initialsField);
-
     submitButton.classList.remove('hide');
+    restartButton.classList.remove('hide')
 }
 
 function highScores() {
     submitButton.classList.add('hide');
     endQuizContainerElement.classList.add('hide');
     viewHighScoresContainerElement.classList.remove('hide');
+    introContainerElement.classList.add('hide')
+    startButton.classList.add('hide')
+    goBackButton.classList.remove('hide')
 };
 
 
@@ -251,28 +238,87 @@ const questions = [
 ]
 
 
-// function selectAnswer(e) {
-    //     const selectButton = e.target
-    //     console.log(selectButton);
-    //     const correct = selectButton.dataset.correct
-    //     setStatusClass(document.body, correct)
-    //     Array.from(answerButtonsElement.children).forEach(button => {
-        //         setStatusClass(button, button.dataset.correct)
-        //     })
+var todoInput = document.querySelector("#todo-text");
+var todoForm = document.querySelector("#todo-form");
+var todoList = document.querySelector("#todo-list");
+var todoCountSpan = document.querySelector("#todo-count");
 
+var todos = [];
 
-        // }
+init();
 
-        // function setStatusClass(element, correct) {
-            //     clearStatusClass(element)
-            //     if (correct) {
-                //         correctContainerElement.classList.remove('hide')
-                //     } else {
-                    //         element.classList.add('wrong')
-                    //     }
-                    // }
+function renderTodos() {
+  // Clear HighScore element and update HighScoreCountSpan
+  todoList.innerHTML = "";
+  todoCountSpan.textContent = todos.length;
 
-/*function clearStatusClass(element) {
-    element.classList.remove('correct')
-    element.classList.remove('wrong')
-}*/
+  // Render a new li for each HighScore
+  for (var i = 0; i < todos.length; i++) {
+    var todo = todos[i];
+
+    var li = document.createElement("li");
+    li.textContent = todo ;
+    li.setAttribute("data-index", i);
+
+    /*var button = document.createElement("button");
+    button.textContent = "Clear Score";
+
+    li.appendChild(button);*/
+    todoList.appendChild(li);
+  }
+}
+
+function init() {
+  // Get stored HighScore from localStorage
+  // Parsing the JSON string to an object
+  var storedTodos = JSON.parse(localStorage.getItem("todos"));
+
+  // If HighScore were retrieved from localStorage, update the HighScore array to it
+  if (storedTodos !== null) {
+    todos = storedTodos;
+  }
+
+  // Render HighScore to the DOM
+  renderTodos();
+}
+
+function storeTodos() {
+  // Stringify and set "HighScore" key in localStorage to todos array
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
+// When form is submitted...
+todoForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  var todoText = todoInput.value.trim() + score;
+
+  // Return from function early if submitted HighScoreText is blank
+  if (todoText === "") {
+    return;
+  }
+
+  // Add new HighScoreText to todos array, clear the input
+  todos.push(todoText);
+  todoInput.value = "";
+
+  // Store updated todos in localStorage, re-render the list
+  storeTodos();
+  renderTodos();
+});
+
+// When a element inside of the HighscoreList is clicked...
+todoList.addEventListener("click", function(event) {
+  var element = event.target;
+
+  // If that element is a button...
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the Highscore element from the list
+    var index = element.parentElement.getAttribute("data-index");
+    todos.splice(index, 1);
+
+    // Store updated todos in localStorage, re-render the list
+    storeTodos();
+    renderTodos();
+  }
+});

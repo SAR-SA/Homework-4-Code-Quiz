@@ -1,18 +1,23 @@
-*, *::before, *::after {
+/*, *::before, *::after {
     box-sizing: border-box;
     font-family: 'Times New Roman', Times, serif;
+}*/
+
+.container {
+    text-align: center;
+    padding-top: 100px;
 }
 
-nav {
+#timer-scope {
     font-weight: bold;
     float: right;
 }
 
-a {
+#top-score {
     float: left;
 }
 
-.container {
+/*.container {
     padding: 0;
     margin: 0;
     display: flex;
@@ -20,7 +25,8 @@ a {
     height: 50vh;
     margin-left: 200px;
     align-items: center;
-}
+}*/
+
 
 
 
@@ -59,11 +65,15 @@ a {
     margin-bottom: 20px;
 }
 
-#submit-btn {
-    margin-top: 125px;
-}
 
 #start-btn {
-    float: left;
     margin-top: 10px;
+}
+
+.controls {
+    text-align: center;
+}
+
+li {
+    background-color: rgb(7, 85, 20);
 }
