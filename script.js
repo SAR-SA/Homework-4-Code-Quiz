@@ -57,6 +57,17 @@ function startTimer() {
     }, 1000);
 }
 
+function stopTimer() {
+    clearInterval(timerInterval);
+    secondsLeft = 300;
+}
+
+function noTime() {
+    if (secondsLeft = 0) {
+        showScore ();
+    }
+}
+
 
 
 //Set next question
@@ -78,6 +89,7 @@ function showScore() {
     tag.appendChild(text);
     var element = document.getElementById("endQuiz-container");
     element.appendChild(tag);
+    stopTimer();
 
     submitButton.classList.remove('hide');
     restartButton.classList.remove('hide');
